@@ -5,3 +5,7 @@
 *.jar
 *.war
 *.ear
+
+*PP.rsc
+*Grammar.pbf
+*Info.pbf
