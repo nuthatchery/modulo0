@@ -3,8 +3,11 @@ package modulo0;
 import java.util.Collection;
 import java.util.Collections;
 
+import modulo0.resources.EclipseModulo0Package;
+
 import org.eclipse.imp.pdb.facts.IConstructor;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.magnolialang.magnolia.resources.EclipseMagnoliaPackage;
 import org.nuthatchery.pica.EclipsePicaInfra;
 import org.nuthatchery.pica.resources.ILanguage;
 import org.nuthatchery.pica.resources.IManagedPackage;
@@ -34,35 +37,28 @@ public class Activator extends AbstractUIPlugin {
 
 			@Override
 			public Collection<String> getActiveNatures() {
-				// TODO Auto-generated method stub
-				return null;
+				return natures;
 			}
 
 			@Override
 			public ClassLoader getParserClassLoader() {
-				// TODO Auto-generated method stub
-				return null;
+				return getClass().getClassLoader();
 			}
 
 			@Override
 			public void initCompiler() {
-				// TODO Auto-generated method stub
-				
 			}
 
 			@Override
 			public IManagedPackage makePackage(IResourceManager manager,
 					IFile resource, IStorage storage, IConstructor id,
 					ILanguage lang) {
-				// TODO Auto-generated method stub
-				return null;
+				return new EclipseModulo0Package(manager, resource, storage, id, lang);
 			}
 
 			@Override
-			public void addRascalSearchPaths(
-					Evaluator evaluator) {
-				// TODO Auto-generated method stub
-				
+			public void addRascalSearchPaths(Evaluator evaluator) {
+				// no rascal paths to add
 			}});
 	}
 
