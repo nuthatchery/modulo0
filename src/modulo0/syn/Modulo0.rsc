@@ -1,52 +1,30 @@
 module modulo0::syn::Modulo0
 
+start syntax CompilationUnit = CompilationUnit: PackageDecl ImportDecl* ModuleDecl*;
 
-syntax Module
+syntax PackageDecl
+	= Package: "package" QualifiedIdentifier ";"
+	;
+	
+syntax ImportDecl
+	= Import: "import" QualifiedIdentifier ";"
+	;
+
+syntax ModuleDecl
 	= Module: "module" Identifier "{" Decl* "}"
 	;
 	
 syntax Decl
-	= ProcDecl: "def" Type Identifier "(" {ParamDecl ","}* ")" "{" Stat* "}"
-	| TypeDecl: "type" Identifier "{" FieldDecl* "}"
+	= Def: "def" QualifiedIdentifier
+	| Use: "use" QualifiedIdentifier
 	;
-	
-syntax FieldDecl
-	= Field: Type Identifier ";"
-	;
-
-syntax ParamDecl
-	= Param: Type Identifier
-	;
-	
-syntax Type
-	= NamedType: QualifiedIdentifier
-	| Tuple: "(" {Type ","}* ")"
-	;
-
-syntax Expr
-	= Apply: QualifiedIdentifier "(" {Expr ","}* ")"
-	| Var: QualifiedIdentifier
-	| Int: LexDecimal
-	;
-
-syntax Stat
-	= VarDecl: Type Identifier "=" Expr ";"
-	| If: "if" Expr "then" Stat* Elsif* "else" Stat* "end"
-	| Return: "return" Expr ";"
-	| Nop: ";"
-	;
-	
-syntax Elsif
-	= "elsif" Stat*
-	;
-
 
 syntax Identifier
 	= Name: LexIdentifier
 	;
 
 syntax QualifiedIdentifier
-	= QName: {Identifier "::"}*
+	= QName: {Identifier "."}*
 	;
 
 lexical LexIdentifier = [a-zA-Z_] !<< [a-zA-Z_] [a-zA-Z_0-9]* !>> [a-zA-Z_0-9];

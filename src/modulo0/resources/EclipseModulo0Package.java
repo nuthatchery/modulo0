@@ -12,6 +12,7 @@ import org.eclipse.imp.pdb.facts.ISourceLocation;
 import org.eclipse.imp.pdb.facts.IValue;
 import org.eclipse.imp.pdb.facts.type.Type;
 import org.eclipse.imp.pdb.facts.visitors.IValueVisitor;
+import org.eclipse.jdt.annotation.Nullable;
 import org.nuthatchery.pica.errors.Severity;
 import org.nuthatchery.pica.resources.ILanguage;
 import org.nuthatchery.pica.resources.IManagedCodeUnit;
@@ -38,6 +39,7 @@ public class EclipseModulo0Package implements IManagedPackage {
 	}
 
 	@Override
+	@Nullable
 	public IManagedResource getParent() {
 		// TODO Auto-generated method stub
 		return null;
@@ -46,7 +48,7 @@ public class EclipseModulo0Package implements IManagedPackage {
 	@Override
 	public URI getURI() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -80,19 +82,21 @@ public class EclipseModulo0Package implements IManagedPackage {
 	}
 
 	@Override
+	@Nullable
 	public Type getType() {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public <T, E extends Throwable> T accept(IValueVisitor<T, E> v) throws E {
+	@Nullable
+	public <T, E extends Throwable> T accept(	@Nullable IValueVisitor<T, E> v) throws E {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isEqual(IValue other) {
+	public boolean isEqual(@Nullable IValue other) {
 		// TODO Auto-generated method stub
 		return false;
 	}
@@ -104,6 +108,7 @@ public class EclipseModulo0Package implements IManagedPackage {
 	}
 
 	@Override
+	@Nullable
 	public IAnnotatable<? extends IValue> asAnnotatable() {
 		// TODO Auto-generated method stub
 		return null;
@@ -112,19 +117,19 @@ public class EclipseModulo0Package implements IManagedPackage {
 	@Override
 	public char[] getContentsCharArray() throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public InputStream getContentsStream() throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getContentsString() throws IOException {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -136,63 +141,63 @@ public class EclipseModulo0Package implements IManagedPackage {
 	@Override
 	public IConstructor getAST(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public IConstructor getDefInfo(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public IConstructor getId() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getKind(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ILanguage getLanguage() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public String getName() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<? extends IManagedCodeUnit> getTransitiveDepends(
 			IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public IConstructor getTypechecked(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<Pair<ISourceLocation, IConstructor>> getXRefs(
 			IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public IXRefInfo getXRefs(ISourceLocation loc, IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
@@ -202,7 +207,7 @@ public class EclipseModulo0Package implements IManagedPackage {
 	}
 
 	@Override
-	public void addMarker(String message, ISourceLocation loc,
+	public void addMarker(String message, @Nullable ISourceLocation loc,
 			String markerType, Severity severity) {
 		// TODO Auto-generated method stub
 
@@ -211,37 +216,37 @@ public class EclipseModulo0Package implements IManagedPackage {
 	@Override
 	public IManagedCodeUnit getChild(IConstructor childId, IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<? extends IManagedCodeUnit> getChildren(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public Collection<? extends IManagedPackage> getDepends(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ISignature getFullSignature(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public ISignature getSourceSignature(IRascalMonitor rm) {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	@Override
 	public IStorage getStorage() {
 		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 }

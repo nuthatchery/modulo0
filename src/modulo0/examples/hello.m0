@@ -1,0 +1,5 @@
+package modulo0.examples;
+
+module Hello {
+	def World;
+}

@@ -25,20 +25,16 @@ import nuthatch.pattern.Pattern;public class Modulo0Patterns {
 		return pf.cons(TermFactory.Cons_Leaf, pf.string(TermFactory.vf.string(s)));
 	}
 
-	public static Pattern<IValue, Type> Apply(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1) {
-		return pf.cons(TermFactory.consType("Apply", 2), arg0, arg1);
+	public static Pattern<IValue, Type> CompilationUnit(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1, Pattern<IValue, Type> arg2) {
+		return pf.cons(TermFactory.consType("CompilationUnit", 3), arg0, arg1, arg2);
 	}
 
-	public static Pattern<IValue, Type> Field(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1) {
-		return pf.cons(TermFactory.consType("Field", 2), arg0, arg1);
+	public static Pattern<IValue, Type> Def(Pattern<IValue, Type> arg0) {
+		return pf.cons(TermFactory.consType("Def", 1), arg0);
 	}
 
-	public static Pattern<IValue, Type> If(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1, Pattern<IValue, Type> arg2, Pattern<IValue, Type> arg3) {
-		return pf.cons(TermFactory.consType("If", 4), arg0, arg1, arg2, arg3);
-	}
-
-	public static Pattern<IValue, Type> Int(Pattern<IValue, Type> arg0) {
-		return pf.cons(TermFactory.consType("Int", 1), arg0);
+	public static Pattern<IValue, Type> Import(Pattern<IValue, Type> arg0) {
+		return pf.cons(TermFactory.consType("Import", 1), arg0);
 	}
 
 	public static Pattern<IValue, Type> Module(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1) {
@@ -49,44 +45,16 @@ import nuthatch.pattern.Pattern;public class Modulo0Patterns {
 		return pf.cons(TermFactory.consType("Name", 1), arg0);
 	}
 
-	public static Pattern<IValue, Type> NamedType(Pattern<IValue, Type> arg0) {
-		return pf.cons(TermFactory.consType("NamedType", 1), arg0);
-	}
-
-	public static Pattern<IValue, Type> Nop() {
-		return pf.cons(TermFactory.consType("Nop", 0));
-	}
-
-	public static Pattern<IValue, Type> Param(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1) {
-		return pf.cons(TermFactory.consType("Param", 2), arg0, arg1);
-	}
-
-	public static Pattern<IValue, Type> ProcDecl(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1, Pattern<IValue, Type> arg2, Pattern<IValue, Type> arg3) {
-		return pf.cons(TermFactory.consType("ProcDecl", 4), arg0, arg1, arg2, arg3);
+	public static Pattern<IValue, Type> Package(Pattern<IValue, Type> arg0) {
+		return pf.cons(TermFactory.consType("Package", 1), arg0);
 	}
 
 	public static Pattern<IValue, Type> QName(Pattern<IValue, Type> arg0) {
 		return pf.cons(TermFactory.consType("QName", 1), arg0);
 	}
 
-	public static Pattern<IValue, Type> Return(Pattern<IValue, Type> arg0) {
-		return pf.cons(TermFactory.consType("Return", 1), arg0);
-	}
-
-	public static Pattern<IValue, Type> Tuple(Pattern<IValue, Type> arg0) {
-		return pf.cons(TermFactory.consType("Tuple", 1), arg0);
-	}
-
-	public static Pattern<IValue, Type> TypeDecl(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1) {
-		return pf.cons(TermFactory.consType("TypeDecl", 2), arg0, arg1);
-	}
-
-	public static Pattern<IValue, Type> Var(Pattern<IValue, Type> arg0) {
-		return pf.cons(TermFactory.consType("Var", 1), arg0);
-	}
-
-	public static Pattern<IValue, Type> VarDecl(Pattern<IValue, Type> arg0, Pattern<IValue, Type> arg1, Pattern<IValue, Type> arg2) {
-		return pf.cons(TermFactory.consType("VarDecl", 3), arg0, arg1, arg2);
+	public static Pattern<IValue, Type> Use(Pattern<IValue, Type> arg0) {
+		return pf.cons(TermFactory.consType("Use", 1), arg0);
 	}
 
 }
