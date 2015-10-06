@@ -8,11 +8,14 @@ import modulo0.resources.EclipseModulo0Package;
 import org.eclipse.imp.pdb.facts.IConstructor;
 import org.eclipse.jdt.annotation.NonNull;
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.eclipse.jdt.annotation.Nullable;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.nuthatchery.pica.eclipse.EclipsePicaInfra;
 import org.nuthatchery.pica.resources.ILanguage;
-import org.nuthatchery.pica.resources.IManagedPackage;
-import org.nuthatchery.pica.resources.IResourceManager;
+import org.nuthatchery.pica.resources.managed.IManagedFile;
+import org.nuthatchery.pica.resources.managed.IManagedPackage;
+import org.nuthatchery.pica.resources.IProjectManager;
+import org.nuthatchery.pica.resources.IWorkspaceManager;
 import org.nuthatchery.pica.resources.IWorkspaceConfig;
 import org.nuthatchery.pica.resources.storage.IStorage;
 import org.osgi.framework.BundleContext;
@@ -45,12 +48,13 @@ public class Activator extends AbstractUIPlugin {
 			public void initCompiler() {
 			}
 
+			
+
 			@Override
-			@NonNullByDefault
-			public IManagedPackage makePackage(IResourceManager manager,
-					IFile resource, IStorage storage, IConstructor id,
-					ILanguage lang) {
-				return new EclipseModulo0Package(manager, resource, storage, id, lang);
+			public IManagedPackage makePackage(IProjectManager manager,
+					IManagedFile res, @Nullable IStorage storage,
+					IConstructor id, ILanguage lang) {
+				return new EclipseModulo0Package(manager, res, storage, id, lang);
 			}
 
 		});
