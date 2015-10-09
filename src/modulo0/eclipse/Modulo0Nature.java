@@ -1,4 +1,4 @@
-package modulo0;
+package modulo0.eclipse;
 
 public class Modulo0Nature {
 

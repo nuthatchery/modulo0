@@ -1,4 +1,4 @@
-package modulo0;
+package modulo0.eclipse;
 
 import java.util.Collection;
 import java.util.Collections;

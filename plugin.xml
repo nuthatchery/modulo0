@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="impulse.languageDescription">
+      <language
+            description="Demo language for Pica"
+            extensions="m0"
+            language="Modulo0"
+            natureID="modulo0.nature">
+      </language>
+   </extension>
+   <extension
+         point="impulse.parser">
+      <parser
+            class="modulo0.eclipse.ParseController"
+            language="Modulo0">
+      </parser>
+   </extension>
+   <extension
+         point="impulse.tokenColorer">
+      <tokenColorer
+            class="modulo0.eclipse.TokenColorer"
+            language="Modulo0">
+      </tokenColorer>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            id="modulo0.sourceEditorScope"
+            name="Modulo0 Source Editor"
+            parentId="impulse.sourceEditorScope">
+      </context>
+   </extension>
+
+</plugin>
