@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Modulo Zero
+Bundle-SymbolicName: modulo0;singleton:=true
+Bundle-Version: 0.1.1.qualifier
+Bundle-Activator: modulo0.eclipse.Activator
+Bundle-Vendor: The Nuthatchery / Anya Helene Bagge
+Require-Bundle: pica;bundle-version="0.1.0",
+ nuthatch;bundle-version="0.99.1"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Export-Package: modulo0.parser,
+ modulo0.resources,
+ modulo0.tree
