@@ -1,55 +1,46 @@
 package modulo0.resources;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.net.URI;
 import java.util.Collection;
 
+import org.eclipse.imp.pdb.facts.ISourceLocation;
 import org.eclipse.jdt.annotation.Nullable;
-import org.nuthatchery.pica.errors.Severity;
 import org.nuthatchery.pica.resources.ILanguage;
-import org.nuthatchery.pica.resources.managed.IManagedCodeUnit;
-import org.nuthatchery.pica.resources.managed.IManagedFile;
-import org.nuthatchery.pica.resources.managed.IManagedPackage;
-import org.nuthatchery.pica.resources.managed.IManagedResource;
-import org.nuthatchery.pica.resources.IProjectManager;
-import org.nuthatchery.pica.resources.IWorkspaceManager;
 import org.nuthatchery.pica.resources.IXRefInfo;
+import org.nuthatchery.pica.resources.handles.IFileHandle;
+import org.nuthatchery.pica.resources.internal.AbstractManagedResource;
+import org.nuthatchery.pica.resources.managed.IManagedCodeUnit;
+import org.nuthatchery.pica.resources.managed.IManagedContainer;
+import org.nuthatchery.pica.resources.regions.IOffsetLength;
 import org.nuthatchery.pica.resources.storage.IStorage;
+import org.nuthatchery.pica.tasks.ITaskMonitor;
 import org.nuthatchery.pica.util.ISignature;
 import org.nuthatchery.pica.util.Pair;
-import org.nuthatchery.pica.tasks.ITaskMonitor;
 
-public class EclipseModulo0Package implements IManagedPackage<String> {
+public class M0Module extends AbstractManagedResource implements IManagedContainer, IManagedCodeUnit {
 
-	@Override
-	public IManagedResource getContainingFile()
-			throws UnsupportedOperationException {
-		// TODO Auto-generated method stub
-		return null;
+	public M0Module(IFileHandle resource) {
+		super(resource.getURI(), resource);
 	}
 
+
 	@Override
-	public int getLength() throws UnsupportedOperationException, IOException {
+	public long getLength() throws UnsupportedOperationException, IOException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
-	public URI getLogicalURI() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
-	public int getOffset() throws UnsupportedOperationException {
+	public long getOffset() throws UnsupportedOperationException {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
 	@Nullable
-	public IManagedResource getParent() {
+	public IManagedContainer getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -66,11 +57,6 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 		return false;
 	}
 
-	@Override
-	public boolean isProject() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public void onResourceChanged() {
@@ -78,24 +64,7 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 		
 	}
 
-	@Override
-	public IManagedResource asManagedResource()
-			throws UnsupportedOperationException {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
-	@Override
-	public boolean exists() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public long getModificationStamp() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	@Override
 	public URI getURI() {
@@ -103,23 +72,7 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 		return null;
 	}
 
-	@Override
-	public boolean isContainer() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
-	@Override
-	public boolean isFile() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isManaged() {
-		// TODO Auto-generated method stub
-		return false;
-	}
 
 	@Override
 	public String getId() {
@@ -167,13 +120,13 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 
 	@Override
 	@Nullable
-	public IXRefInfo getXRefs(ISourceLocation loc, ITaskMonitor rm) {
+	public IXRefInfo getXRefs(IOffsetLength loc, ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<Pair<ISourceLocation, String>> getXRefs(ITaskMonitor rm) {
+	public Collection<Pair<IOffsetLength, Object>> getXRefs(ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -192,20 +145,20 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 
 	@Override
 	@Nullable
-	public IManagedCodeUnit<String> getChild(String childId, ITaskMonitor rm) {
+	public IManagedCodeUnit getChild(Object childId, ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<? extends IManagedCodeUnit<String>> getChildren(
+	public Collection<? extends IManagedCodeUnit> getChildren(
 			ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Collection<? extends IManagedCodeUnit<String>> getDepends(
+	public Collection<? extends IManagedCodeUnit> getDepends(
 			ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
@@ -215,5 +168,11 @@ public class EclipseModulo0Package implements IManagedPackage<String> {
 	public ISignature getFullSignature(ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+
+	@Override
+	public boolean isRoot() {
+		return false;
 	}
 }

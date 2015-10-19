@@ -109,11 +109,11 @@ public class ParseController implements IParseController {
 	}
 
 	@Override
-	public Iterator<Token> getTokenIterator(IRegion region) {
+	public Iterator<Object> getTokenIterator(IRegion region) {
 		if (parseTree == null) {
 			return null;
 		} else {
-			return tokens.iterator();
+			return (Iterator<Object>) ((List<?>)tokens).iterator();
 		}
 	}
 }

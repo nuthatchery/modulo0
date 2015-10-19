@@ -21,7 +21,7 @@
  *************************************************************************/
 package modulo0.parser;
 
-import org.nuthatchery.pica.resources.managed.IManagedFile;
+import org.nuthatchery.pica.resources.handles.IFileHandle;
 
 public class Token {
 	private final String category;
@@ -31,7 +31,7 @@ public class Token {
 
 	private final String data;
 
-	private final IManagedFile file;
+	private final IFileHandle file;
 
 
 	public String getData() {
@@ -39,12 +39,12 @@ public class Token {
 	}
 
 
-	public IManagedFile getFile() {
+	public IFileHandle getFile() {
 		return file;
 	}
 
 
-	public Token(String category, String data, IManagedFile file, int offset, int length) {
+	public Token(String category, String data, IFileHandle file, int offset, int length) {
 		super();
 
 		this.category = category;
@@ -53,7 +53,7 @@ public class Token {
 		this.offset = offset;
 		this.length = length;
 	}
-	public Token(String category, String data, IManagedFile file, int offset) {
+	public Token(String category, String data, IFileHandle file, int offset) {
 		super();
 
 		this.category = category;
