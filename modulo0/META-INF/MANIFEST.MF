@@ -12,4 +12,4 @@ Export-Package: modulo0,
  modulo0.parser,
  modulo0.resources,
  modulo0.tree
-Import-Package: org.eclipse.imp.pdb.facts
+Import-Package: org.rascalmpl.value
