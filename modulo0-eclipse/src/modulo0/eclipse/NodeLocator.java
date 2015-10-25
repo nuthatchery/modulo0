@@ -22,21 +22,11 @@
  *************************************************************************/
 package modulo0.eclipse;
 
-import modulo0.parser.Token;
-
 import org.eclipse.core.runtime.IPath;
-
-import io.usethesource.impulse.editor.ModelTreeNode;
-import io.usethesource.impulse.parser.ISourcePositionLocator;
-
-import org.eclipse.imp.pdb.facts.IConstructor;
-import org.eclipse.imp.pdb.facts.ISourceLocation;
-import org.eclipse.imp.pdb.facts.IValue;
 import org.eclipse.jdt.annotation.Nullable;
-import org.nuthatchery.pica.terms.INodePredicate;
-import org.rascalmpl.values.uptr.ITree;
-import org.rascalmpl.values.uptr.TreeAdapter;
-import org.rascalmpl.values.uptr.RascalValueFactory;
+
+import io.usethesource.impulse.parser.ISourcePositionLocator;
+import modulo0.parser.Token;
 
 public class NodeLocator implements ISourcePositionLocator {
 

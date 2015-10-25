@@ -22,15 +22,55 @@
       <tokenColorer
             class="modulo0.eclipse.TokenColorer"
             language="Modulo0">
-      </tokenColorer>
+      </tokenColorer>2"
    </extension>
    <extension
          point="org.eclipse.ui.contexts">
       <context
-            id="modulo0.sourceEditorScope"
+            id="modulo0.eclipse.sourceEditorScope"
             name="Modulo0 Source Editor"
             parentId="impulse.sourceEditorScope">
       </context>
    </extension>
-
+   <extension
+         id="modulo0.nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run
+               class="modulo0.eclipse.Modulo0Nature">
+         </run>
+      </runtime>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            locationURI="menu:org.eclipse.ui.main.menu">
+            <menu id="modulo0menu" label="Pica">
+            <command
+                  commandId="modulo0.eclipse.commands.RunBenchmarks"
+                  id="RunBenchmarks"
+                  label="&amp;Run Benchmarks">
+            </command>
+             <command
+                  commandId="modulo0.eclipse.commands.MakeExampleProject"
+                  id="MakeExampleProject"
+                  label="&amp;(Re)create Modulo0 Example Project">
+            </command>           </menu>
+      </menuContribution>  
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="RunBenchmarks"
+            defaultHandler="modulo0.eclipse.commands.RunBenchmarks"
+            description=""
+            id="modulo0.eclipse.commands.RunBenchmarks">
+      </command>
+          <command
+            name="MakeExampleProject"
+            defaultHandler="modulo0.eclipse.commands.MakeExampleProject"
+            description=""
+            id="modulo0.eclipse.commands.MakeExampleProject">
+      </command>
+         </extension>
 </plugin>

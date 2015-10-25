@@ -29,6 +29,10 @@ public class Module extends M0Node {
 		return ((Var) getChild(0)).getToken();
 		
 	}
+	
+	public ImportList getImportList() {
+		return (ImportList) getChild(1);
+	}
 	public String toString() {
 		String modName = getModuleName().getData();
 		ImportList list = (ImportList) getChild(1);

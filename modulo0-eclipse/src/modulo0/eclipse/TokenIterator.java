@@ -27,12 +27,6 @@ import java.util.List;
 
 import modulo0.parser.Token;
 
-import org.eclipse.imp.pdb.facts.IConstructor;
-import org.eclipse.imp.pdb.facts.IValue;
-import org.rascalmpl.values.uptr.ProductionAdapter;
-import org.rascalmpl.values.uptr.TreeAdapter;
-import org.rascalmpl.values.uptr.visitors.TreeVisitor;
-
 public class TokenIterator implements Iterator<Token> {
 	protected final List<Token> tokList;
 	protected final Iterator<Token> tokIterator;
@@ -64,10 +58,5 @@ public class TokenIterator implements Iterator<Token> {
 	@Override
 	public void remove() {
 		throw new UnsupportedOperationException();
-	}
-
-
-	private class LexicalCollector  {
-		private int location;
 	}
 }
