@@ -33,26 +33,6 @@ public class Token {
 
 	private final IFileHandle file;
 
-
-	public String getData() {
-		return data;
-	}
-
-
-	public IFileHandle getFile() {
-		return file;
-	}
-
-
-	public Token(String category, String data, IFileHandle file, int offset, int length) {
-		super();
-
-		this.category = category;
-		this.data = data;
-		this.file = file;
-		this.offset = offset;
-		this.length = length;
-	}
 	public Token(String category, String data, IFileHandle file, int offset) {
 		super();
 
@@ -63,20 +43,37 @@ public class Token {
 		this.length = data.length();
 	}
 
+	public Token(String category, String data, IFileHandle file, int offset, int length) {
+		super();
+
+		this.category = category;
+		this.data = data;
+		this.file = file;
+		this.offset = offset;
+		this.length = length;
+	}
+
 	public String getCategory() {
 		return category;
 	}
 
+	public String getData() {
+		return data;
+	}
+
+	public IFileHandle getFile() {
+		return file;
+	}
 
 	public int getLength() {
 		return length;
 	}
 
-
 	public int getOffset() {
 		return offset;
 	}
-	
+
+	@Override
 	public String toString() {
 		return "\"" + data + "\":" + category + offset + "+" + length;
 	}

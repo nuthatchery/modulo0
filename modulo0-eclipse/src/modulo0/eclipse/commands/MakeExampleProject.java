@@ -28,33 +28,36 @@ public class MakeExampleProject extends AbstractCommand<Object> {
 	}
 
 	@Override
-	protected void perform(Object data, ExecutionEvent event, IParseController parseCtrl, Point point,
-			ITaskMonitor tm) {
-		
-		try {
-	
-			IProject project = ProjectUtil.createProject("Modulo0Example", true, Modulo0Nature.NATURE_ID);
-			IFolder src = project.getFolder("src");
-			src.create(true, true, EclipseTaskMonitor.makeProgressMonitor(tm, 10));
-			
-			String code = "module Test;\n\ndata Foo Bar FooFoo\n";
-			IFile file = src.getFile("Test.m0");
-			file.create(new ByteArrayInputStream(code.toString().getBytes("UTF-8")), true, EclipseTaskMonitor.makeProgressMonitor(tm, 10));
-		} catch (CoreException | UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-	@Override
 	protected Object initData(String name, ExecutionEvent event, IParseController parseCtrl, UniversalEditor editor) {
 		IProject project = ResourcesPlugin.getWorkspace().getRoot().getProject("Modulo0Example");
 
-		if(project.exists()) {
-			boolean confirm = MessageDialog.openConfirm(Display.getDefault().getActiveShell(), name, "Project Modulo0Example already exists. Delete and recreate?");
-			if(!confirm)
+		if (project.exists()) {
+			boolean confirm = MessageDialog.openConfirm(Display.getDefault().getActiveShell(), name,
+					"Project Modulo0Example already exists. Delete and recreate?");
+			if (!confirm)
 				throw new CancelledException("");
 		}
 
 		return null;
+	}
+
+	@Override
+	protected void perform(Object data, ExecutionEvent event, IParseController parseCtrl, Point point,
+			ITaskMonitor tm) {
+
+		try {
+
+			IProject project = ProjectUtil.createProject("Modulo0Example", true, Modulo0Nature.NATURE_ID);
+			IFolder src = project.getFolder("src");
+			src.create(true, true, EclipseTaskMonitor.makeProgressMonitor(tm, 10));
+
+			String code = "module Test;\n\ndata Foo Bar FooFoo\n";
+			IFile file = src.getFile("Test.m0");
+			file.create(new ByteArrayInputStream(code.toString().getBytes("UTF-8")), true,
+					EclipseTaskMonitor.makeProgressMonitor(tm, 10));
+		} catch (CoreException | UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

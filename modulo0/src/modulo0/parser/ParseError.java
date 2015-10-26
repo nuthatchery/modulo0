@@ -13,10 +13,6 @@ public class ParseError extends RuntimeException {
 	private final String msg;
 	private final URI uri;
 
-	public URI getUri() {
-		return uri;
-	}
-
 	public ParseError(String msg, URI uri, int offset, int length) {
 		super();
 		this.offset = offset;
@@ -25,16 +21,20 @@ public class ParseError extends RuntimeException {
 		this.uri = uri;
 	}
 
-	public int getOffset() {
-		return offset;
+	public String getErrorMessage() {
+		return msg;
 	}
 
 	public int getLength() {
 		return length;
 	}
 
-	public String getErrorMessage() {
-		return msg;
+	public int getOffset() {
+		return offset;
+	}
+
+	public URI getUri() {
+		return uri;
 	}
 
 }

@@ -20,6 +20,36 @@ import io.usethesource.impulse.editor.UniversalEditor;
 import io.usethesource.impulse.parser.IParseController;
 
 public abstract class AbstractCommand<Data> extends AbstractHandler {
+	class CmdJob extends Job {
+		final ExecutionEvent event;
+		final IParseController parseCtrl;
+		final Point point;
+		final Data data;
+
+		CmdJob(Data data, String name, ExecutionEvent event, IParseController parseCtrl, Point p) {
+			super(name);
+			this.event = event;
+			this.point = p;
+			this.parseCtrl = parseCtrl;
+			this.data = data;
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			monitor.beginTask(getName(), 1000);
+			try {
+				perform(data, event, parseCtrl, point, new EclipseTaskMonitor(SubMonitor.convert(monitor, 1000)));
+			} catch (Exception e) {
+				Pica.get().logException("Command " + getName() + " failed", e);
+				return Status.CANCEL_STATUS;
+			} finally {
+
+				monitor.done();
+			}
+			return Status.OK_STATUS;
+		}
+	}
+
 	protected final String name;
 
 	/**
@@ -39,7 +69,7 @@ public abstract class AbstractCommand<Data> extends AbstractHandler {
 		Point point = null;
 		if (editorPart instanceof UniversalEditor) {
 			editor = (UniversalEditor) editorPart;
-			parseCtrl = (IParseController) editor.getParseController();
+			parseCtrl = editor.getParseController();
 			point = editor.getSelection();
 		}
 		Data data = null;
@@ -52,6 +82,25 @@ public abstract class AbstractCommand<Data> extends AbstractHandler {
 		CmdJob job = new CmdJob(data, name, event, parseCtrl, point);
 		job.schedule();
 
+		return null;
+	}
+
+	/**
+	 * Set up arbitraty data to be passed to the command. Mainly useful for
+	 * extra information that needs to be read from the UI thread. Can also be
+	 * used to stop the command if there is no associated parsecontroller or
+	 * editor (by throwing a CancelledException).
+	 * 
+	 * @param name
+	 * @param event
+	 * @param parseCtrl
+	 * @param editor
+	 * @return
+	 * @throws CancelledException
+	 *             if the command cannot proceed for some reason
+	 */
+	protected Data initData(String name, ExecutionEvent event, IParseController parseCtrl, UniversalEditor editor)
+			throws CancelledException {
 		return null;
 	}
 
@@ -73,54 +122,4 @@ public abstract class AbstractCommand<Data> extends AbstractHandler {
 	 */
 	protected abstract void perform(Data data, ExecutionEvent event, IParseController parseCtrl, Point point,
 			ITaskMonitor tm);
-
-	/**
-	 * Set up arbitraty data to be passed to the command. Mainly useful for
-	 * extra information that needs to be read from the UI thread. Can also be
-	 * used to stop the command if there is no associated parsecontroller or
-	 * editor (by throwing a CancelledException).
-	 * 
-	 * @param name
-	 * @param event
-	 * @param parseCtrl
-	 * @param editor
-	 * @return
-	 * @throws CancelledException
-	 *             if the command cannot proceed for some reason
-	 */
-	protected Data initData(String name, ExecutionEvent event, IParseController parseCtrl, UniversalEditor editor)
-			throws CancelledException {
-		return null;
-	}
-
-	class CmdJob extends Job {
-		final ExecutionEvent event;
-		final IParseController parseCtrl;
-		final Point point;
-		final Data data;
-
-		CmdJob(Data data, String name, ExecutionEvent event, IParseController parseCtrl, Point p) {
-			super(name);
-			this.event = event;
-			this.point = p;
-			this.parseCtrl = parseCtrl;
-			this.data = data;
-		}
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			monitor.beginTask(getName(), 1000);
-			try {
-				perform(data, event, parseCtrl, point, new EclipseTaskMonitor(SubMonitor.convert(monitor, 1000)));
-			} catch(Exception e) {
-				Pica.get().logException("Command " + getName() + " failed", e);
-				return Status.CANCEL_STATUS;
-			}
-			finally {
-		
-				monitor.done();
-			}
-			return Status.OK_STATUS;
-		}
-	}
 }

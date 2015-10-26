@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URI;
 import java.util.Collection;
 
-import org.rascalmpl.value.ISourceLocation;
 import org.eclipse.jdt.annotation.Nullable;
 import org.nuthatchery.pica.resources.ILanguage;
 import org.nuthatchery.pica.resources.IXRefInfo;
@@ -24,55 +23,30 @@ public class M0Def extends AbstractManagedResource implements IManagedContainer,
 		super(resource.getURI(), resource);
 	}
 
-
-	@Override
-	public long getLength() throws UnsupportedOperationException, IOException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-
-	@Override
-	public long getOffset() throws UnsupportedOperationException {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
 	@Override
 	@Nullable
-	public IManagedContainer getParent() {
+	public IManagedCodeUnit getChild(Object childId, ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public boolean isCodeUnit() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean isFragment() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-
-	@Override
-	public void onResourceChanged() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	@Override
-	public URI getURI() {
+	public Collection<? extends IManagedCodeUnit> getChildren(ITaskMonitor rm) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	@Override
+	public Collection<? extends IManagedCodeUnit> getDepends(ITaskMonitor rm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
+	@Override
+	public ISignature getFullSignature(ITaskMonitor rm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public String getId() {
@@ -93,7 +67,26 @@ public class M0Def extends AbstractManagedResource implements IManagedContainer,
 	}
 
 	@Override
+	public long getLength() throws UnsupportedOperationException, IOException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
 	public String getName() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long getOffset() throws UnsupportedOperationException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	@Nullable
+	public IManagedContainer getParent() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -112,8 +105,13 @@ public class M0Def extends AbstractManagedResource implements IManagedContainer,
 	}
 
 	@Override
-	public Collection<? extends IManagedCodeUnit> getTransitiveDepends(
-			ITaskMonitor rm) {
+	public Collection<? extends IManagedCodeUnit> getTransitiveDepends(ITaskMonitor rm) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public URI getURI() {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -138,41 +136,31 @@ public class M0Def extends AbstractManagedResource implements IManagedContainer,
 	}
 
 	@Override
-	public void onDependencyChanged() {
+	public boolean isCodeUnit() {
 		// TODO Auto-generated method stub
-		
+		return false;
 	}
 
 	@Override
-	@Nullable
-	public IManagedCodeUnit getChild(Object childId, ITaskMonitor rm) {
+	public boolean isFragment() {
 		// TODO Auto-generated method stub
-		return null;
+		return false;
 	}
-
-	@Override
-	public Collection<? extends IManagedCodeUnit> getChildren(
-			ITaskMonitor rm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public Collection<? extends IManagedCodeUnit> getDepends(
-			ITaskMonitor rm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public ISignature getFullSignature(ITaskMonitor rm) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 
 	@Override
 	public boolean isRoot() {
 		return false;
+	}
+
+	@Override
+	public void onDependencyChanged() {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onResourceChanged() {
+		// TODO Auto-generated method stub
+
 	}
 }

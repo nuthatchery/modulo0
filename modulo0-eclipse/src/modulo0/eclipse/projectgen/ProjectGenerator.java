@@ -52,9 +52,13 @@ import org.nuthatchery.pica.util.tests.DepGraphGenerator;
 import modulo0.eclipse.Modulo0Nature;
 
 public class ProjectGenerator {
-	private final NullProgressMonitor monitor = new NullProgressMonitor();
+	public static String pkgNameOf(IFile file) {
+		return file.getName().substring(0, file.getName().lastIndexOf('.'));
+	}
 
+	private final NullProgressMonitor monitor = new NullProgressMonitor();
 	private final List<Pair<String, Long>> timings = new ArrayList<>();
+
 	private IProject project;
 
 	private IFolder src;
@@ -65,6 +69,20 @@ public class ProjectGenerator {
 		this.PROJECT_NAME = projectName;
 	}
 
+	public void closeProject(ITaskMonitor tm) throws CoreException {
+		if (project == null)
+			throw new IllegalStateException("Project not intialised");
+
+		IProjectManager manager = Pica.getResourceManager(project.getName());
+		assert manager != null;
+
+		System.err.print("Closing project...");
+		long t0 = System.currentTimeMillis();
+		project.close(EclipseTaskMonitor.makeProgressMonitor(tm, 10));
+		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
+		timings.add(new Pair<>("closeProject", (System.currentTimeMillis() - t0)));
+	}
+
 	public IProject createProject() throws CoreException {
 		project = ProjectUtil.createProject(PROJECT_NAME, true, Modulo0Nature.NATURE_ID);
 		src = project.getFolder("src");
@@ -73,45 +91,8 @@ public class ProjectGenerator {
 		return project;
 	}
 
-	public List<Pair<String, Long>> getTimings() {
-		return new ArrayList<>(timings);
-	}
-	
 	public void deleteProject() throws CoreException {
 		project.delete(true, monitor);
-	}
-
-	public IDepGraph<IFile> generateGraph(int nFiles, int nOps) {
-		if (src == null)
-			throw new IllegalStateException("Project not intialised");
-
-		long t0;
-
-		List<IFile> files = new ArrayList<IFile>();
-		for (int i = 0; i < nFiles; i++) {
-			String name = "";
-			int j = i;
-			do {
-				name += String.valueOf((char) ('A' + j % 26));
-				j /= 26;
-			} while (j != 0);
-			files.add(src.getFile(name + ".m0"));
-		}
-		t0 = System.currentTimeMillis();
-		IWritableDepGraph<IFile> graph = DepGraphGenerator.genDepGraph(files, nOps, true);
-
-		timings.add(new Pair<>("generateGraph", (System.currentTimeMillis() - t0)));
-
-		return graph;
-	}
-
-	public static String pkgNameOf(IFile file) {
-		return file.getName().substring(0, file.getName().lastIndexOf('.'));
-	}
-
-	public void generateFiles(int nFiles, int nOps) {
-		IDepGraph<IFile> graph = generateGraph(nFiles, nOps);
-		generateFiles(graph);
 	}
 
 	public void generateFiles(IDepGraph<IFile> graph) {
@@ -159,44 +140,33 @@ public class ProjectGenerator {
 		timings.add(new Pair<>("generateFiles", (System.currentTimeMillis() - t0)));
 	}
 
-	public void processChanges(ITaskMonitor tm) {
-		if (project == null)
-			throw new IllegalStateException("Project not intialised");
-
-		IProjectManager manager = Pica.getResourceManager(project.getName());
-		assert manager != null;
-
-		System.err.print("Processing changes...");
-		long t0 = System.currentTimeMillis();
-		manager.processChanges(tm);
-		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
-		timings.add(new Pair<>("processChanges", (System.currentTimeMillis() - t0)));
-
+	public void generateFiles(int nFiles, int nOps) {
+		IDepGraph<IFile> graph = generateGraph(nFiles, nOps);
+		generateFiles(graph);
 	}
 
-	public void closeProject(ITaskMonitor tm) throws CoreException {
-		if (project == null)
+	public IDepGraph<IFile> generateGraph(int nFiles, int nOps) {
+		if (src == null)
 			throw new IllegalStateException("Project not intialised");
 
-		IProjectManager manager = Pica.getResourceManager(project.getName());
-		assert manager != null;
+		long t0;
 
-		System.err.print("Closing project...");
-		long t0 = System.currentTimeMillis();
-		project.close(EclipseTaskMonitor.makeProgressMonitor(tm, 10));
-		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
-		timings.add(new Pair<>("closeProject", (System.currentTimeMillis() - t0)));
-	}
+		List<IFile> files = new ArrayList<IFile>();
+		for (int i = 0; i < nFiles; i++) {
+			String name = "";
+			int j = i;
+			do {
+				name += String.valueOf((char) ('A' + j % 26));
+				j /= 26;
+			} while (j != 0);
+			files.add(src.getFile(name + ".m0"));
+		}
+		t0 = System.currentTimeMillis();
+		IWritableDepGraph<IFile> graph = DepGraphGenerator.genDepGraph(files, nOps, true);
 
-	public void openProject(ITaskMonitor tm) throws CoreException {
-		if (project == null)
-			throw new IllegalStateException("Project not intialised");
-		
-		System.err.print("Opening project...");
-		long t0 = System.currentTimeMillis();
-		project.open(EclipseTaskMonitor.makeProgressMonitor(tm, 10));
-		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
-		timings.add(new Pair<>("openProject", (System.currentTimeMillis() - t0)));
+		timings.add(new Pair<>("generateGraph", (System.currentTimeMillis() - t0)));
+
+		return graph;
 	}
 
 	public IDepGraph<IManagedCodeUnit> getDepGraph(ITaskMonitor tm) {
@@ -213,6 +183,36 @@ public class ProjectGenerator {
 		timings.add(new Pair<>("getDepGraph", (System.currentTimeMillis() - t0)));
 
 		return depGraph;
+	}
+
+	public List<Pair<String, Long>> getTimings() {
+		return new ArrayList<>(timings);
+	}
+
+	public void openProject(ITaskMonitor tm) throws CoreException {
+		if (project == null)
+			throw new IllegalStateException("Project not intialised");
+
+		System.err.print("Opening project...");
+		long t0 = System.currentTimeMillis();
+		project.open(EclipseTaskMonitor.makeProgressMonitor(tm, 10));
+		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
+		timings.add(new Pair<>("openProject", (System.currentTimeMillis() - t0)));
+	}
+
+	public void processChanges(ITaskMonitor tm) {
+		if (project == null)
+			throw new IllegalStateException("Project not intialised");
+
+		IProjectManager manager = Pica.getResourceManager(project.getName());
+		assert manager != null;
+
+		System.err.print("Processing changes...");
+		long t0 = System.currentTimeMillis();
+		manager.processChanges(tm);
+		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
+		timings.add(new Pair<>("processChanges", (System.currentTimeMillis() - t0)));
+
 	}
 
 }

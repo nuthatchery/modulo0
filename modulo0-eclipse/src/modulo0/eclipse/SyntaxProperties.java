@@ -21,9 +21,10 @@
  *************************************************************************/
 package modulo0.eclipse;
 
+import org.eclipse.jface.text.IRegion;
+
 import io.usethesource.impulse.parser.IParseController;
 import io.usethesource.impulse.services.ILanguageSyntaxProperties;
-import org.eclipse.jface.text.IRegion;
 
 public class SyntaxProperties implements ILanguageSyntaxProperties {
 
@@ -32,18 +33,15 @@ public class SyntaxProperties implements ILanguageSyntaxProperties {
 		return " * ";
 	}
 
-
 	@Override
 	public String getBlockCommentEnd() {
 		return "*/";
 	}
 
-
 	@Override
 	public String getBlockCommentStart() {
 		return "/*";
 	}
-
 
 	@Override
 	public IRegion getDoubleClickRegion(int offset, IParseController pc) {
@@ -51,42 +49,36 @@ public class SyntaxProperties implements ILanguageSyntaxProperties {
 		return null;
 	}
 
-
 	@Override
 	public String[][] getFences() {
-		return new String[][] { new String[] { "(", ")" }, new String[] { "{", "}" }, new String[] { "<", ">" }, new String[] { "[", "]" } };
+		return new String[][] { new String[] { "(", ")" }, new String[] { "{", "}" }, new String[] { "<", ">" },
+				new String[] { "[", "]" } };
 	}
-
 
 	@Override
 	public int[] getIdentifierComponents(final String ident) {
 		return new int[0];
 	}
 
-
 	@Override
 	public String getIdentifierConstituentChars() {
 		return null;
 	}
-
 
 	@Override
 	public String getSingleLineCommentPrefix() {
 		return "//";
 	}
 
-
 	@Override
 	public boolean isIdentifierPart(char ch) {
 		return Character.isJavaIdentifierPart(ch);
 	}
 
-
 	@Override
 	public boolean isIdentifierStart(char ch) {
 		return Character.isJavaIdentifierStart(ch);
 	}
-
 
 	@Override
 	public boolean isWhitespace(char ch) {

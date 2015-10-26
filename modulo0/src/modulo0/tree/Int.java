@@ -1,38 +1,36 @@
 package modulo0.tree;
 
-import modulo0.tree.Expr;
-import modulo0.tree.Int;
-import modulo0.tree.Type;
-
 public class Int extends Expr {
 
 	private int value;
-
 
 	public Int(int i) {
 		super("Int", Type.INT, new Expr[] {});
 		value = i;
 	}
 
+	@Override
+	protected Expr copy() {
+		return new Int(value);
+	}
 
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) {
+		if (this == obj) {
 			return true;
 		}
-		if(!super.equals(obj)) {
+		if (!super.equals(obj)) {
 			return false;
 		}
-		if(getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass()) {
 			return false;
 		}
 		Int other = (Int) obj;
-		if(value != other.value) {
+		if (value != other.value) {
 			return false;
 		}
 		return true;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -42,20 +40,14 @@ public class Int extends Expr {
 		return result;
 	}
 
-
 	@Override
 	public String toRepr() {
-		return "Int("+ String.valueOf(value) +")";
+		return "Int(" + String.valueOf(value) + ")";
 	}
 
 	@Override
 	public String toString() {
 		return String.valueOf(value);
-	}
-
-	@Override
-	protected Expr copy() {
-		return new Int(value);
 	}
 
 }

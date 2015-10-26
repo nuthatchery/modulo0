@@ -61,7 +61,7 @@ public class M0Module extends AbstractManagedResource implements IManagedContain
 		this.treeFact = new GenericFact<>("tree", storage, null);
 		this.dependsFact = new GenericFact<>("depends");
 
-//		System.err.println("M0Module: RESOURCE ADDED: " + resource.getURI());
+		// System.err.println("M0Module: RESOURCE ADDED: " + resource.getURI());
 
 	}
 
@@ -243,7 +243,7 @@ public class M0Module extends AbstractManagedResource implements IManagedContain
 		 * mod : children) { mod.onDependencyChanged(); }
 		 */
 
-//		System.err.println("M0Module: DEP CHANGED: " + this);
+		// System.err.println("M0Module: DEP CHANGED: " + this);
 	}
 
 	@Override
@@ -253,7 +253,7 @@ public class M0Module extends AbstractManagedResource implements IManagedContain
 		depSignature = null;
 		revision.incrementAndGet();
 
-//		System.err.println("M0Module: RESOURCE CHANGED: " + this);
+		// System.err.println("M0Module: RESOURCE CHANGED: " + this);
 	}
 
 	private Module treeFact(ITaskMonitor tm) {

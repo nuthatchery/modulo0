@@ -26,15 +26,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import io.usethesource.impulse.parser.IParseController;
-import io.usethesource.impulse.services.ITokenColorer;
-import modulo0.parser.Token;
-
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Display;
+
+import io.usethesource.impulse.parser.IParseController;
+import io.usethesource.impulse.services.ITokenColorer;
+import modulo0.parser.Token;
 
 public class TokenColorer implements ITokenColorer {
 	public static final String TYPE = "Type";
@@ -48,11 +47,11 @@ public class TokenColorer implements ITokenColorer {
 	public static final String KEYWORD = "Keyword";
 	public static final String AMBIGUOUS = "AMB";
 	public static final String ERROR = "SyntaxError";
-	public static final List<String> CATEGORIES = Arrays.asList(TYPE, IDENTIFIER, VARIABLE, CONSTANT, COMMENT, TODO, FUNCTION, PROCEDURE, KEYWORD, AMBIGUOUS, ERROR);
+	public static final List<String> CATEGORIES = Arrays.asList(TYPE, IDENTIFIER, VARIABLE, CONSTANT, COMMENT, TODO,
+			FUNCTION, PROCEDURE, KEYWORD, AMBIGUOUS, ERROR);
 	private final TextAttribute normal;
 
 	private final Map<String, TextAttribute> map = new HashMap<String, TextAttribute>();
-
 
 	public TokenColorer() {
 		super();
@@ -70,18 +69,12 @@ public class TokenColorer implements ITokenColorer {
 		map.put(PROCEDURE, new TextAttribute(display.getSystemColor(SWT.COLOR_DARK_BLUE), null, SWT.NONE));
 		map.put(AMBIGUOUS, new TextAttribute(null, display.getSystemColor(SWT.COLOR_YELLOW), SWT.NONE));
 		map.put(ERROR, new TextAttribute(null, display.getSystemColor(SWT.COLOR_RED), SWT.NONE));
-
-		final Color mxaCol1 = new Color(Display.getDefault(), 95, 35, 20);
-		final Color mxaCol2 = new Color(Display.getDefault(), 120, 25, 15);
-		final Color mxaCol3 = new Color(Display.getDefault(), 60, 45, 20);
 	}
-
 
 	@Override
 	public IRegion calculateDamageExtent(final IRegion seed, final IParseController ctlr) {
 		return seed;
 	}
-
 
 	@Override
 	public TextAttribute getColoring(final IParseController controller, final Object token) {

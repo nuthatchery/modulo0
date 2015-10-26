@@ -2,15 +2,11 @@ package modulo0.tree;
 
 import java.util.Arrays;
 
-import modulo0.tree.Type;
-import modulo0.tree.M0Node;
-
 public abstract class M0Node {
 
 	protected String name;
 	protected M0Node[] children;
 	protected Type type;
-
 
 	public M0Node(String name, Type type, M0Node... children) {
 		this.name = name;
@@ -18,61 +14,55 @@ public abstract class M0Node {
 		this.children = children.clone();
 	}
 
-
 	public int arity() {
 		return children.length;
 	}
 
+	protected abstract M0Node copy();
 
 	@Override
 	public boolean equals(Object obj) {
-		if(this == obj) {
+		if (this == obj) {
 			return true;
 		}
-		if(obj == null) {
+		if (obj == null) {
 			return false;
 		}
-		if(getClass() != obj.getClass()) {
+		if (getClass() != obj.getClass()) {
 			return false;
 		}
 		M0Node other = (M0Node) obj;
-		if(!Arrays.equals(children, other.children)) {
+		if (!Arrays.equals(children, other.children)) {
 			return false;
 		}
-		if(name == null) {
-			if(other.name != null) {
+		if (name == null) {
+			if (other.name != null) {
 				return false;
 			}
-		}
-		else if(!name.equals(other.name)) {
+		} else if (!name.equals(other.name)) {
 			return false;
 		}
-		if(type == null) {
-			if(other.type != null) {
+		if (type == null) {
+			if (other.type != null) {
 				return false;
 			}
-		}
-		else if(!type.equals(other.type)) {
+		} else if (!type.equals(other.type)) {
 			return false;
 		}
 		return true;
 	}
 
-
 	public M0Node getChild(int i) {
 		return children[i];
 	}
-
 
 	public String getName() {
 		return name;
 	}
 
-
 	public Type getType() {
 		return type;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -84,18 +74,15 @@ public abstract class M0Node {
 		return result;
 	}
 
-
 	public M0Node replace(int i, M0Node child) {
 		M0Node e = copy();
 		e.children[i] = child;
 		return e;
 	}
 
-
 	public String toRepr() {
 		return toString();
 	}
-
 
 	@Override
 	public String toString() {
@@ -103,8 +90,8 @@ public abstract class M0Node {
 		b.append(name);
 		b.append("(");
 		boolean first = true;
-		for(M0Node e : children) {
-			if(!first) {
+		for (M0Node e : children) {
+			if (!first) {
 				b.append(", ");
 			}
 			b.append(e.toString());
@@ -113,8 +100,5 @@ public abstract class M0Node {
 		b.append(")");
 		return b.toString();
 	}
-
-
-	protected abstract M0Node copy();
 
 }

@@ -9,13 +9,14 @@ import org.nuthatchery.pica.resources.ILanguage;
 public class Modulo0Language implements ILanguage {
 	private static Modulo0Language instance = new Modulo0Language();
 
-	private Modulo0Language() {
-		
-	}
-	
 	public static Modulo0Language getInstance() {
-		return instance ;
+		return instance;
 	}
+
+	private Modulo0Language() {
+
+	}
+
 	@Override
 	public Collection<String> getExtensions() {
 		return Arrays.asList("m0");

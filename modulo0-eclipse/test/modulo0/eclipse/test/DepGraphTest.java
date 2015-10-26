@@ -26,34 +26,6 @@ import modulo0.eclipse.projectgen.ProjectGenerator;
 public class DepGraphTest {
 	private static final String PROJECT_NAME = "GenerateProjecTest";
 
-	private ProjectGenerator projGen;
-
-	@Before
-	public void setUp() throws Exception {
-		Activator.getOrStartInstance();
-
-		projGen = new ProjectGenerator(PROJECT_NAME);
-		projGen.createProject();
-	}
-
-	@After
-	public void tearDown() throws Exception {
-		projGen.deleteProject();
-	}
-
-	@Test
-	public final void test() throws UnsupportedEncodingException, CoreException, InterruptedException {
-
-		IDepGraph<IFile> graph = projGen.generateGraph(5000, 20000);
-		projGen.generateFiles(graph);
-		projGen.processChanges(new NullTaskMonitor());
-		IDepGraph<IManagedCodeUnit> depGraph = projGen.getDepGraph(new NullTaskMonitor());
-		System.err.println("STARTING COMPARISON");
-		assertSameGraph(graph, depGraph);
-		System.err.println("OK!");
-
-	}
-
 	public static void assertSameGraph(IDepGraph<IFile> fileGraph, IDepGraph<IManagedCodeUnit> depGraph) {
 		List<IFile> fileElements = new ArrayList<IFile>(fileGraph.getElements());
 		List<IManagedCodeUnit> pkgElements = new ArrayList<IManagedCodeUnit>(depGraph.getElements());
@@ -102,5 +74,33 @@ public class DepGraphTest {
 
 	public static String pkgNameOf(IFile file) {
 		return file.getName().substring(0, file.getName().lastIndexOf('.'));
+	}
+
+	private ProjectGenerator projGen;
+
+	@Before
+	public void setUp() throws Exception {
+		Activator.getOrStartInstance();
+
+		projGen = new ProjectGenerator(PROJECT_NAME);
+		projGen.createProject();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		projGen.deleteProject();
+	}
+
+	@Test
+	public final void test() throws UnsupportedEncodingException, CoreException, InterruptedException {
+
+		IDepGraph<IFile> graph = projGen.generateGraph(5000, 20000);
+		projGen.generateFiles(graph);
+		projGen.processChanges(new NullTaskMonitor());
+		IDepGraph<IManagedCodeUnit> depGraph = projGen.getDepGraph(new NullTaskMonitor());
+		System.err.println("STARTING COMPARISON");
+		assertSameGraph(graph, depGraph);
+		System.err.println("OK!");
+
 	}
 }

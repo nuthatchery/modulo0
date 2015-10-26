@@ -3,11 +3,6 @@ package modulo0.eclipse;
 import java.util.Iterator;
 import java.util.List;
 
-import modulo0.parser.M0Parser;
-import modulo0.parser.ParseError;
-import modulo0.parser.Token;
-import modulo0.tree.Module;
-
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.text.IDocument;
@@ -21,6 +16,10 @@ import io.usethesource.impulse.parser.IParseController;
 import io.usethesource.impulse.parser.ISourcePositionLocator;
 import io.usethesource.impulse.services.IAnnotationTypeInfo;
 import io.usethesource.impulse.services.ILanguageSyntaxProperties;
+import modulo0.parser.M0Parser;
+import modulo0.parser.ParseError;
+import modulo0.parser.Token;
+import modulo0.tree.Module;
 
 public class ParseController implements IParseController {
 
@@ -33,24 +32,24 @@ public class ParseController implements IParseController {
 	private IPath path;
 
 	@Override
+	public IAnnotationTypeInfo getAnnotationTypeInfo() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Object getCurrentAst() {
+		return parseTree;
+	}
+
+	@Override
+	public IDocument getDocument() {
+		return document;
+	}
+
+	@Override
 	public Language getLanguage() {
 		return language;
-	}
-
-	@Override
-	public void initialize(IPath filePath, ISourceProject project,
-			IMessageHandler handler) {
-		this.handler = handler;
-		this.project = project;
-		this.path = filePath;
-
-		this.language = LanguageRegistry.findLanguage(filePath, null);
-
-	}
-
-	@Override
-	public ISourceProject getProject() {
-		return project;
 	}
 
 	@Override
@@ -59,25 +58,8 @@ public class ParseController implements IParseController {
 	}
 
 	@Override
-	public Object parse(String source, IProgressMonitor monitor) {
-		M0Parser m0Parser = new M0Parser(source);
-		try {
-			parseTree = m0Parser.parseModule();
-		} catch (ParseError e) {
-			if (e.getOffset() >= 0) {
-				handler.handleSimpleMessage("Editor: " + e.getErrorMessage(),
-						e.getOffset(), e.getOffset() + e.getLength(), 0, 0, 0,
-						0);
-			}
-		}
-		tokens = m0Parser.getTokens();
-
-		return parseTree;
-	}
-
-	@Override
-	public Object getCurrentAst() {
-		return parseTree;
+	public ISourceProject getProject() {
+		return project;
 	}
 
 	@Override
@@ -90,10 +72,24 @@ public class ParseController implements IParseController {
 		return new SyntaxProperties();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public IAnnotationTypeInfo getAnnotationTypeInfo() {
-		// TODO Auto-generated method stub
-		return null;
+	public Iterator<Object> getTokenIterator(IRegion region) {
+		if (parseTree == null) {
+			return null;
+		} else {
+			return (Iterator<Object>) ((List<?>) tokens).iterator();
+		}
+	}
+
+	@Override
+	public void initialize(IPath filePath, ISourceProject project, IMessageHandler handler) {
+		this.handler = handler;
+		this.project = project;
+		this.path = filePath;
+
+		this.language = LanguageRegistry.findLanguage(filePath, null);
+
 	}
 
 	@Override
@@ -104,16 +100,18 @@ public class ParseController implements IParseController {
 	}
 
 	@Override
-	public IDocument getDocument() {
-		return document;
-	}
-
-	@Override
-	public Iterator<Object> getTokenIterator(IRegion region) {
-		if (parseTree == null) {
-			return null;
-		} else {
-			return (Iterator<Object>) ((List<?>)tokens).iterator();
+	public Object parse(String source, IProgressMonitor monitor) {
+		M0Parser m0Parser = new M0Parser(source);
+		try {
+			parseTree = m0Parser.parseModule();
+		} catch (ParseError e) {
+			if (e.getOffset() >= 0) {
+				handler.handleSimpleMessage("Editor: " + e.getErrorMessage(), e.getOffset(),
+						e.getOffset() + e.getLength(), 0, 0, 0, 0);
+			}
 		}
+		tokens = m0Parser.getTokens();
+
+		return parseTree;
 	}
 }

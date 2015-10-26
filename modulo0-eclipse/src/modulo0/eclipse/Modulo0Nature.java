@@ -22,24 +22,22 @@ public class Modulo0Nature implements IProjectNature {
 	@Override
 	public void configure() throws CoreException {
 		IProjectDescription desc = project.getDescription();
-		for(ICommand cmd : desc.getBuildSpec()) {
-			if(cmd.getBuilderName().equals(BUILDER_ID)) {
+		for (ICommand cmd : desc.getBuildSpec()) {
+			if (cmd.getBuilderName().equals(BUILDER_ID)) {
 				return;
 			}
 		}
-		/* TODO: enable when we have a builder
-		ICommand[] cmds = desc.getBuildSpec();
-		cmds = Arrays.copyOf(cmds, cmds.length + 1);
-
-		ICommand cmd = desc.newCommand();
-		cmd.setBuilderName(BUILDER_ID);
-		cmds[cmds.length - 1] = cmd;
-		desc.setBuildSpec(cmds);
-		*/
+		/*
+		 * TODO: enable when we have a builder ICommand[] cmds =
+		 * desc.getBuildSpec(); cmds = Arrays.copyOf(cmds, cmds.length + 1);
+		 * 
+		 * ICommand cmd = desc.newCommand(); cmd.setBuilderName(BUILDER_ID);
+		 * cmds[cmds.length - 1] = cmd; desc.setBuildSpec(cmds);
+		 */
 		project.setDescription(desc, null);
 		((EclipseWorkspaceManager) Pica.getWorkspaceManager()).openProject(project);
 
-		System.err.println("Magnolia nature configured for " + project.getName());		
+		System.err.println("Magnolia nature configured for " + project.getName());
 	}
 
 	@Override
@@ -48,15 +46,15 @@ public class Modulo0Nature implements IProjectNature {
 		ICommand[] cmds = desc.getBuildSpec();
 		List<ICommand> list = new ArrayList<ICommand>(Arrays.asList(cmds));
 		Iterator<ICommand> iter = list.iterator();
-		while(iter.hasNext()) {
+		while (iter.hasNext()) {
 			ICommand cmd = iter.next();
-			if(cmd.getBuilderName().equals(BUILDER_ID)) {
+			if (cmd.getBuilderName().equals(BUILDER_ID)) {
 				iter.remove();
 			}
 		}
 		desc.setBuildSpec(list.toArray(new ICommand[list.size()]));
 		project.setDescription(desc, null);
-		((EclipseWorkspaceManager) Pica.getWorkspaceManager()).closeProject(project);		
+		((EclipseWorkspaceManager) Pica.getWorkspaceManager()).closeProject(project);
 	}
 
 	@Override
@@ -66,7 +64,7 @@ public class Modulo0Nature implements IProjectNature {
 
 	@Override
 	public void setProject(IProject project) {
-this.project = project;		
+		this.project = project;
 	}
 
 }

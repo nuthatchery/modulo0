@@ -31,29 +31,25 @@ public class TokenIterator implements Iterator<Token> {
 	protected final List<Token> tokList;
 	protected final Iterator<Token> tokIterator;
 
-
 	public TokenIterator(final Object parseTree) {
 		tokList = new ArrayList<Token>(1000);
 
-		if(parseTree != null) {
-			//parseTree.accept(new LexicalCollector());
+		if (parseTree != null) {
+			// parseTree.accept(new LexicalCollector());
 		}
 		tokIterator = tokList.iterator();
 
 	}
-
 
 	@Override
 	public boolean hasNext() {
 		return tokIterator.hasNext();
 	}
 
-
 	@Override
 	public Token next() {
 		return tokIterator.next();
 	}
-
 
 	@Override
 	public void remove() {

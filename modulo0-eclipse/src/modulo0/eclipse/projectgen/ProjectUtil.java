@@ -32,22 +32,21 @@ import modulo0.eclipse.Activator;
 
 public class ProjectUtil {
 
-	public static IProject createProject(String projectName, boolean deleteIfExists, String... natures) throws CoreException  {
+	public static IProject createProject(String projectName, boolean deleteIfExists, String... natures)
+			throws CoreException {
 		Activator.getOrStartInstance();
 		IWorkspace workspace = ResourcesPlugin.getWorkspace();
 		IProject project = workspace.getRoot().getProject(projectName);
 
-		if(project.exists()) {
-			if(deleteIfExists) {
+		if (project.exists()) {
+			if (deleteIfExists) {
 				try {
-					
-					project.delete(IResource.FORCE|IResource.ALWAYS_DELETE_PROJECT_CONTENT, null);
-				}
-				catch(CoreException e) {
+
+					project.delete(IResource.FORCE | IResource.ALWAYS_DELETE_PROJECT_CONTENT, null);
+				} catch (CoreException e) {
 					e.printStackTrace();
 				}
-			}
-			else {
+			} else {
 				return project;
 			}
 		}

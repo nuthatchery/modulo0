@@ -30,15 +30,12 @@ import modulo0.parser.Token;
 
 public class NodeLocator implements ISourcePositionLocator {
 
-
-
 	@Override
 	@Nullable
 	public Object findNode(final Object ast, final int offset) {
-		
+
 		return null;
 	}
-
 
 	@Override
 	@Nullable
@@ -47,19 +44,16 @@ public class NodeLocator implements ISourcePositionLocator {
 		return null;
 	}
 
-
 	@Override
 	public int getEndOffset(final Object node) {
 		return getStartOffset(node) + getLength(node) - 1;
 	}
 
-
 	@Override
 	public int getLength(final Object node) {
-		if(node instanceof Token) {
+		if (node instanceof Token) {
 			return ((Token) node).getLength();
-		}
-		else
+		} else
 			throw new IllegalArgumentException();
 	}
 
@@ -69,13 +63,11 @@ public class NodeLocator implements ISourcePositionLocator {
 		return null;
 	}
 
-
 	@Override
 	public int getStartOffset(final Object node) {
-		if(node instanceof Token) {
+		if (node instanceof Token) {
 			return ((Token) node).getOffset();
-		}
-		else
+		} else
 			throw new IllegalArgumentException();
 	}
 }

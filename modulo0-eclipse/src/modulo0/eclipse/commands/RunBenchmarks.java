@@ -24,21 +24,21 @@ public class RunBenchmarks extends AbstractCommand<Object> {
 		System.out.println("point: " + point);
 
 		System.out.println("Benchmarks!!!");
-		
+
 		String projectName = "_Modulo0Benchmarks";
-		
+
 		ProjectGenerator projGen = new ProjectGenerator(projectName);
 		try {
 			projGen.createProject();
 			projGen.generateFiles(5000, 20000);
 			projGen.processChanges(tm);
 			projGen.closeProject(tm);
-		projGen.openProject(tm);
+			projGen.openProject(tm);
 			projGen.processChanges(tm);
-			
-			for(Pair<String, Long> p : projGen.getTimings())
+
+			for (Pair<String, Long> p : projGen.getTimings())
 				System.out.println(p.getFirst() + ": " + p.getSecond());
-			
+
 		} catch (CoreException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
