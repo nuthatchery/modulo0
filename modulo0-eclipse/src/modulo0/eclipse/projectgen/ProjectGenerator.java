@@ -168,6 +168,19 @@ public class ProjectGenerator {
 
 		return graph;
 	}
+	public void getTopology(ITaskMonitor tm) {
+		if (project == null)
+			throw new IllegalStateException("Project not intialised");
+
+		IProjectManager manager = Pica.getResourceManager(project.getName());
+		assert manager != null;
+		System.err.print("Getting topological order...");
+		long t0 = System.currentTimeMillis();
+		manager.getPackageDependencyGraph(tm).topological();
+		System.err.println("done (" + (System.currentTimeMillis() - t0) + "ms)");
+		timings.add(new Pair<>("topoSort", (System.currentTimeMillis() - t0)));
+
+	}
 
 	public IDepGraph<IManagedCodeUnit> getDepGraph(ITaskMonitor tm) {
 		if (project == null)

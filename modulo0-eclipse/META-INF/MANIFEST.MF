@@ -1,11 +1,12 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Modulo Zero
-Bundle-SymbolicName: modulo0.eclipse;singleton:=true
+Bundle-Name: Modulo-0 Eclipse
+Bundle-SymbolicName: modulo_zero.eclipse;singleton:=true
 Bundle-Version: 0.1.1.qualifier
 Bundle-Activator: modulo0.eclipse.Activator
 Bundle-Vendor: The Nuthatchery / Anya Helene Bagge
-Require-Bundle: org.eclipse.ui;bundle-version="3.107.0",
+Require-Bundle: modulo_zero,
+ org.eclipse.ui;bundle-version="3.107.0",
  org.eclipse.core.resources;bundle-version="3.10.0",
  org.eclipse.core.runtime;bundle-version="3.11.1",
  pica;bundle-version="0.2.0",
@@ -14,7 +15,6 @@ Require-Bundle: org.eclipse.ui;bundle-version="3.107.0",
  impulse;bundle-version="0.1.0",
  org.eclipse.jface.text;bundle-version="3.10.0",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.9.0",
- modulo0;bundle-version="0.1.1",
  org.junit;resolution:=optional,
  org.eclipse.pde.junit.runtime;bundle-version="3.4.500";resolution:=optional,
  org.eclipse.ui.editors;bundle-version="3.9.0"
