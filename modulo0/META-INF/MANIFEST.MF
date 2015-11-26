@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Modulo-0
-Bundle-SymbolicName: modulo_zero;singleton:=true
+Bundle-SymbolicName: modulo0;singleton:=true
 Bundle-Version: 0.1.1.qualifier
 Bundle-Vendor: The Nuthatchery / Anya Helene Bagge
 Require-Bundle: pica;bundle-version="0.2.0",
@@ -11,4 +11,6 @@ Export-Package: modulo0,
  modulo0.resources,
  modulo0.tree
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Import-Package: org.osgi.framework
+Bundle-Activator: modulo0.Activator
 Bundle-ActivationPolicy: lazy
